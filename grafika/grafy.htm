@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Highcharts Example</title>
+
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+
+<wide><div style="width: 1000px; height: 600px;" id="households"></div></wide>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+
+<script type="text/javascript">
+
+var colors = ['#EA614A','#ECA038','#A38456','#008836','#20649B','#6B96CA','#A87A93','#D19C95'];
+
+var spain = [null,0.1152,0.1124,0.1277,0.1294,0.1381,0.1417,0.1492,0.1597,0.1684,0.1766,0.1789,0.1752,0.1787,0.1702,0.1861,0.1815,0.1864,0.1718,0.1796,0.1805,0.1712,0.1873,0.1947],
+estonia = [null,0.0652,0.0639,0.067,0.0712,0.0696,0.0695,0.0711,0.0704,0.0763,0.0771,0.0794,0.0994,0.1007,0.0967,0.0982,0.0951,0.0951,0.0935,0.096,0.0926,0.095,0.0989,0.1048],
+belgium = [null,0.1286,0.15,0.1619,0.1431,0.139,0.1449,0.146,0.1572,0.1595,0.159,0.1684,0.1583,0.1641,0.1673,0.1678,0.1817,0.1842,0.1567,0.1815,0.1929,0.179,0.1903,0.1998],
+portugal = [null,0.1206,0.1074,0.1066,0.1264,0.1383,0.1093,0.1061,0.1015,0.1068,0.1105,0.1174,0.1210,0.1243,0.1268,0.1301,0.1150,0.1153,0.1239,0.1211,0.1106,0.1080,0.1007,0.1028],
+poland = [null,0.1069,0.0965,0.1005,0.0883,0.1010,0.1049,0.1082,0.1145,0.1052,0.1106,0.1195,0.1155,0.1121,0.1107,0.1097,0.1125,0.1105,0.1037,0.1053,0.0960,0.0950,0.0906,0.0889],
+slovakia = [null,0.1152,0.1194,0.1283,0.1294,0.1311,0.1277,0.1376,0.1372,0.1395,0.1400,0.1404,0.1384,0.1366,0.1224,0.1237,0.1223,0.1232,0.1154,0.1249,0.0832,0.0838,0.0942,0.0849],
+ireland = [null,0.1690,0.1559,0.1791,0.1789,0.1635,0.1589,0.1629,0.1584,0.1755,0.1850,0.1954,0.1951,0.2026,0.2008,0.2085,0.1970,0.1991,0.1895,0.1878,0.1846,0.1865,0.1846,0.2006],
+lithuania = [null,0.0737,0.0729,0.0732,0.0799,0.0768,0.0955,0.1005,0.1004,0.1009,0.1042,0.1048,0.0860,0.0878,0.0893,0.0883,0.0874,0.0863,0.0859,0.0818,0.0783,0.0777,0.0771,0.0771],
+bulgaria = [0.0603,0.0593,0.0685,0.0685,0.0685,0.0675,0.0692,0.0688,0.0727,0.0706,0.0796,0.0771,0.0735,0.0689,0.0746,0.0785,0.0798,0.0797,0.0781,0.0796,0.0819,0.0816,0.0838],
+czechia = [0.0963,0.099,0.1167,0.1189,0.1212,0.1277,0.1236,0.1279,0.1372,0.1345,0.1374,0.1377,0.1378,0.1348,0.1137,0.1129,0.1134,0.1153,0.1161,0.1162,0.1176,0.1218,0.1286,0.1299],
+germany = [0.1227,0.1279,0.1299,0.1341,0.1401,0.1359,0.1381,0.137,0.1406,0.1395,0.1441,0.1432,0.1493,0.1489,0.1435,0.144,0.1431,0.1427,0.1388,0.1382,0.1389,0.1383,0.1379,0.1378],
+eu28 = [0.1159,0.1143,0.1149,0.1213,0.1198,0.1191,0.1203,0.1248,0.1282,0.1312,0.1336,0.1384,0.1372,0.1389,0.1375,0.1411,0.1371,0.1379,0.1299,0.1303,0.1274,0.1274,0.1285,0.1329]
+
+
+var roky = ['1/2007','7/2007','1/2008','7/2008','1/2009','7/2009','1/2010','7/2010','1/2011','7/2011','1/2012','7/2012','1/2013','7/2013','1/2014','7/2014','1/2015','7/2015','1/2016','7/2016','1/2017','7/2017','1/2018','7/2018'];
+
+Highcharts.chart('households', {
+    chart: {
+        type: 'line'
+    },
+
+    title: {
+        text: 'Electricity prices for household consumers'
+    },
+
+    xAxis: {
+        categories: roky
+    },
+
+    yAxis: {
+        title: {
+            text: 'Euro/kilowatt-hour'
+        },
+        labels: {
+            formatter: function () {
+                return '€ ' + this.value;
+            }
+        }
+    },
+
+    tooltip: {
+        valueSuffix: ' €/kWh'
+    },
+
+    plotOptions: {
+        series: {
+            marker: {
+                symbol: "circle"
+            }
+        }
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    credits: {
+        href: 'https://appsso.eurostat.ec.europa.eu/nui/show.do?query=BOOKMARK_DS-052780_QID_-75D2B285_UID_-3F171EB0&layout=TIME,C,X,0;GEO,L,Y,0;PRODUCT,L,Z,0;CONSOM,L,Z,1;UNIT,L,Z,2;TAX,L,Z,3;CURRENCY,L,Z,4;INDICATORS,C,Z,5;&zSelection=DS-052780INDICATORS,OBS_FLAG;DS-052780TAX,X_TAX;DS-052780UNIT,KWH;DS-052780CONSOM,4161903;DS-052780PRODUCT,6000;DS-052780CURRENCY,EUR;&rankName1=TAX_1_2_-1_2&rankName2=UNIT_1_2_-1_2&rankName3=CURRENCY_1_2_-1_2&rankName4=CONSOM_1_2_-1_2&rankName5=INDICATORS_1_2_-1_2&rankName6=PRODUCT_1_2_-1_2&rankName7=TIME_1_0_0_0&rankName8=GEO_1_2_0_1&sortC=ASC_-1_FIRST&rStp=&cStp=&rDCh=&cDCh=&rDM=true&cDM=true&footnes=false&empty=false&wai=false&time_mode=NONE&time_most_recent=false&lang=EN&cfo=%23%23%23%2C%23%23%23.%23%23%23',
+        text: 'Zdroj: Eurostat'
+    },
+
+    series: [{
+        name: 'germany',
+        data: germany,
+        color: colors[0]
+    }, {
+        name: 'czechia',
+        data: czechia,
+        color: colors[4]
+    }, {
+        name: 'eu',
+        data: eu28,
+        color: colors[3]
+    }, {
+        name: 'spain',
+        data: spain,
+        color: '#111'
+    }, {
+        name: 'estonia',
+        data: estonia,
+        color: '#222'
+    }, {
+        name: 'belgium',
+        data: belgium,
+        color: '#333'
+    }, {
+        name: 'portugal',
+        data: portugal,
+        color: '#444'
+    }, {
+        name: 'poland',
+        data: poland,
+        color: '#55'
+    }, {
+        name: 'slovakia',
+        data: slovakia,
+        color: '#666'
+    }, {
+        name: 'ireland',
+        data: ireland,
+        color: '#777'
+    }, {
+        name: 'lithuania',
+        data: lithuania,
+        color: '#888'
+    }, {
+        name: 'bulgaria',
+        data: bulgaria,
+        color: '#999'
+    }]
+
+});
+
+</script>
+</html>
